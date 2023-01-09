@@ -1,13 +1,15 @@
 package com.jenspersson.mallgroda.proc;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class WidgetTemplate {
 
-   private Set<Import> imports;
-   private List<Fragment> fragments;
+   private Set<Import> imports = new HashSet<>();
+   private List<Fragment> fragments = new ArrayList<>();
 
    public Set<Import> getImports() {
     return this.imports;
