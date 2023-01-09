@@ -28,11 +28,12 @@ public class WidgetModelProcessor extends AbstractProcessor {
                 TemplateParser parser = TemplateParserRegistry.lookup(syntax);
                 String template = model.template();                
                 try {
-                    FileInputStream fist = new FileInputStream(template);                                        
+                    FileInputStream fist = new FileInputStream(template);
+                    Aston ast = parser.parse(fist);
+                    WidgetTemplate widgetTemplate = new WidgetTemplate();
+                    ast.apply(widgetTemplate);
                     WidgetJavaFile out = new WidgetJavaFile(model.generatee());
-                    RootAston ast = parser.parse(fist);
-                    
-                    out.write(ast, elem, processingEnv);
+                    out.write(widgetTemplate, elem, processingEnv);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

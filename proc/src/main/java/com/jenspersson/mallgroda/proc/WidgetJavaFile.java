@@ -13,7 +13,6 @@ import com.jenspersson.mallgroda.runtime.Out;
 
 public class WidgetJavaFile {
 
-    //private Writer writer;
     private String name;
     private String pkg;
 
@@ -30,13 +29,13 @@ public class WidgetJavaFile {
         }
     }
 
-    public void write(RootAston ast, Element widgetModel, 
+    public void write(WidgetTemplate template, Element widgetModel, 
             ProcessingEnvironment processingEnv) throws Exception {
         Filer filer = processingEnv.getFiler();
         JavaFileObject javaFileObject = filer.createSourceFile(pkg + "." + name, widgetModel);
         //this.writer = javaFileObject.openWriter();
         
-        Set<Import> imports = ast.imports();
+        Set<Import> imports = template.getImports();
         imports.add(new Import(widgetModel.toString()));
 
         imports.add(new Import("java.io.Writer"));
@@ -63,7 +62,7 @@ public class WidgetJavaFile {
              " model, Writer w) throws IOException {\n");
         out.w(indent.more(), "// render file\n");
 
-        for (Fragment frag : ast.flatten()) {
+        for (Fragment frag : template.getFragments()) {
             frag.write(indent, out);
         }
 

@@ -1,12 +1,14 @@
 package com.jenspersson.mallgroda.proc;
 
-import java.util.function.Consumer;
+public interface Aston {
 
-public class Aston {
+   public void apply(WidgetTemplate template);
 
-    public void collect(Consumer<Fragment> sink) {
-        
-        
-    }
+   /*
+   * @return this
+   * */
+   public Aston add(Aston child) throws AstonIsLeafException;
+
+   public Aston clear();
 
 }

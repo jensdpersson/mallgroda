@@ -2,11 +2,11 @@ package com.jenspersson.mallgroda.proc;
 
 import com.jenspersson.mallgroda.runtime.Out;
 
-public class TextFragment extends Fragment {
+public class LineFragment extends Fragment {
 
     private String text;
 
-    public TextFragment(String text) {
+    public LineFragment(String text) {
         this.text = text;
     }
 

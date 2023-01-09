@@ -16,15 +16,15 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-public class TalishTemplateParser implements TemplateParser {
+public class TalTemplateParser implements TemplateParser {
 
     private static final XMLInputFactory staxFactory = XMLInputFactory.newFactory();
 
     @Override
-    public RootAston parse(InputStream input) throws Exception {
+    public Aston parse(InputStream input) throws Exception {
         XMLEventReader xreader = staxFactory.createXMLEventReader(input);
         AstonStack stack = new AstonStack();
-        RootAston root = new RootAston();
+        Aston root = new ParentAston();
         stack.push(root);
         while(xreader.hasNext()) {
             XMLEvent evt = xreader.nextEvent();            
@@ -37,7 +37,7 @@ public class TalishTemplateParser implements TemplateParser {
                     QName qname = start.getName();
                     String prefix = qname.getPrefix();
                     String local = qname.getLocalPart();
-                    XmlAston xfrag = new XmlAston(prefix, local);
+                    HtmlAston xfrag = new HtmlAston(prefix, local);
                     Aston frag = xfrag;
                     Aston top = stack.peek();
                     List<Directive> dires = new ArrayList<>();
@@ -69,7 +69,7 @@ public class TalishTemplateParser implements TemplateParser {
                 break;
                 case XMLEvent.CDATA:  
                 case XMLEvent.CHARACTERS:                  
-                    stack.peek().add(new TextFragment(evt.asCharacters().toString()));
+                    stack.peek().add(new TextAston(evt.asCharacters().toString()));
                 break;
                 case XMLEvent.COMMENT: break;                
                 case XMLEvent.END_ELEMENT: 
@@ -99,10 +99,10 @@ public class TalishTemplateParser implements TemplateParser {
         public int compareTo(Directive that) {
             return this.dire.compareTo(that.dire);
         }
-        public Fragment apply(Fragment frag) {
+        public Aston apply(Aston aston) {
             switch (dire) {
-                case content: return frag.content(value);
-                default: return frag;
+                case content: return aston.clear().add(new TextAston(value));
+                default: return aston;
             }            
         }
     }

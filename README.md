@@ -2,7 +2,8 @@
 
 Type-safe server-side templating
 
-The Mallgroda annotation processor finds classes provided by you:
+The basic idea is that... 
+the Mallgroda annotation processor finds classes provided by you, e.g.
 
     @WidgetModel(
         template = "path/to/hello.html",
@@ -63,7 +64,8 @@ The Mallgroda annotation processor finds classes provided by you:
 ... which will, at runtime, when given an instance of its model class, such as ...
 
     HelloWidgetModel model = new 
-      HelloWidgetModel("World");     
+      HelloWidgetModel("World");       
+    new HelloWidget().render(model, someWriterProllyAWebResponse);     
 
 ... render a templated fragment ...
 
@@ -77,3 +79,8 @@ The Mallgroda annotation processor finds classes provided by you:
         Hello, <span>World</span>
       </body>
     </html>
+
+The plan is to start with support for a TAL-like syntax for HTML but build
+to enable other templating syntaxen, perhaps mustache, and other output formats, perhaps json or sql.
+
+Currently, this is not quite there yet. Check back later

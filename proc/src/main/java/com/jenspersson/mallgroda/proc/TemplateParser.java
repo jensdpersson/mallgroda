@@ -4,5 +4,5 @@ import java.io.InputStream;
 
 public interface TemplateParser {
 
-    public RootAston parse(InputStream input) throws Exception;
+    public Aston parse(InputStream input) throws Exception;
 }
