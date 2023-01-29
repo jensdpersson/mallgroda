@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jenspersson.mallgroda.proc.TextFragmentTests.RemoveTrailingIndentsTest" time="0.367" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jenspersson.mallgroda.proc.TextFragmentTests.RemoveTrailingIndentsTest" time="0.19" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/jens/projekt/mallgroda/proc/target/test-classes:/home/jens/projekt/mallgroda/proc/target/classes:/home/jens/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/jens/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/jens/projekt/mallgroda/runtime/target/mallgroda-runtime-1.0-SNAPSHOT.jar:"/>
+    <property name="java.class.path" value="/home/jens/projekt/mallgroda/proc/target/test-classes:/home/jens/projekt/mallgroda/proc/target/classes:/home/jens/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/jens/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/jens/projekt/mallgroda/runtime/target/classes:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
@@ -16,8 +16,8 @@
     <property name="user.country" value="SE"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk1.8.0_181/jre/lib/amd64"/>
-    <property name="sun.java.command" value="/home/jens/projekt/mallgroda/proc/target/surefire/surefirebooter1668865845846257060.jar /home/jens/projekt/mallgroda/proc/target/surefire 2023-01-09T09-43-34_772-jvmRun1 surefire8296593314076399410tmp surefire_07170373662672019092tmp"/>
-    <property name="surefire.test.class.path" value="/home/jens/projekt/mallgroda/proc/target/test-classes:/home/jens/projekt/mallgroda/proc/target/classes:/home/jens/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/jens/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/jens/projekt/mallgroda/runtime/target/mallgroda-runtime-1.0-SNAPSHOT.jar:"/>
+    <property name="sun.java.command" value="/home/jens/projekt/mallgroda/proc/target/surefire/surefirebooter7182717567078112755.jar /home/jens/projekt/mallgroda/proc/target/surefire 2023-01-17T13-10-44_220-jvmRun1 surefire8948654962580811735tmp surefire_02737479411194222039tmp"/>
+    <property name="surefire.test.class.path" value="/home/jens/projekt/mallgroda/proc/target/test-classes:/home/jens/projekt/mallgroda/proc/target/classes:/home/jens/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/jens/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/jens/projekt/mallgroda/runtime/target/classes:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/home/jens"/>
     <property name="user.language" value="sv"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/jens/projekt/mallgroda/proc/target/surefire/surefirebooter1668865845846257060.jar"/>
+    <property name="surefire.real.class.path" value="/home/jens/projekt/mallgroda/proc/target/surefire/surefirebooter7182717567078112755.jar"/>
     <property name="sun.boot.class.path" value="/usr/lib/jvm/jdk1.8.0_181/jre/lib/resources.jar:/usr/lib/jvm/jdk1.8.0_181/jre/lib/rt.jar:/usr/lib/jvm/jdk1.8.0_181/jre/lib/sunrsasign.jar:/usr/lib/jvm/jdk1.8.0_181/jre/lib/jsse.jar:/usr/lib/jvm/jdk1.8.0_181/jre/lib/jce.jar:/usr/lib/jvm/jdk1.8.0_181/jre/lib/charsets.jar:/usr/lib/jvm/jdk1.8.0_181/jre/lib/jfr.jar:/usr/lib/jvm/jdk1.8.0_181/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="1.8.0_181-b13"/>
@@ -57,5 +57,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="someSpaces" classname="com.jenspersson.mallgroda.proc.TextFragmentTests.RemoveTrailingIndentsTest" time="0.011"/>
+  <testcase name="someSpaces" classname="com.jenspersson.mallgroda.proc.TextFragmentTests.RemoveTrailingIndentsTest" time="0.007"/>
 </testsuite>

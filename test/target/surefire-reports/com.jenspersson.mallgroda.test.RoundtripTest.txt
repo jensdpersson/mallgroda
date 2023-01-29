@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: com.jenspersson.mallgroda.test.RoundtripTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.692 s <<< FAILURE! - in com.jenspersson.mallgroda.test.RoundtripTest
+static_text(com.jenspersson.mallgroda.test.RoundtripTest)  Time elapsed: 0.248 s  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[    ]<head></head>> but was:<[]<head></head>>
+	at com.jenspersson.mallgroda.test.RoundtripTest.doTest(RoundtripTest.java:43)
+	at com.jenspersson.mallgroda.test.RoundtripTest.static_text(RoundtripTest.java:67)
+

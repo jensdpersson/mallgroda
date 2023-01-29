@@ -15,7 +15,7 @@ public class HtmlAston extends ParentAston {
             if (Html5.isVoid(name)) {
                 template.addFragment(new LineFragment("<" + name + attrs + "/>"));
             } else {
-                template.addFragment(new LineFragment("<" + name + attrs + ">&nbsp;</" + name + ">"));
+                template.addFragment(new LineFragment("<" + name + attrs + "></" + name + ">"));
             }
         } else {
             template.addFragment(new LineFragment("<" + name + attrs + ">"));

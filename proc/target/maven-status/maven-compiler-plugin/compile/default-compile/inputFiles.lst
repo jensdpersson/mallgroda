@@ -9,6 +9,8 @@
 /home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/TalTemplateParser.java
 /home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/WidgetModelProcessor.java
 /home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/WidgetJavaFile.java
+/home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/EvalAston.java
+/home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/EvalFragment.java
 /home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/AstonIsLeafException.java
 /home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/AstonStack.java
 /home/jens/projekt/mallgroda/proc/src/main/java/com/jenspersson/mallgroda/proc/Html5.java

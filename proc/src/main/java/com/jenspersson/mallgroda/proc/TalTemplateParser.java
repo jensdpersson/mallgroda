@@ -2,14 +2,10 @@ package com.jenspersson.mallgroda.proc;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.namespace.QName;
-import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.events.Attribute;
@@ -68,12 +64,15 @@ public class TalTemplateParser implements TemplateParser {
                 case XMLEvent.ATTRIBUTE: 
                 break;
                 case XMLEvent.CDATA:  
-                case XMLEvent.CHARACTERS:                  
-                    stack.peek().add(new TextAston(evt.asCharacters().toString()));
+                case XMLEvent.CHARACTERS:
+                    String text = evt.asCharacters().toString();
+                    //if (text.startsWith("\n")) {
+                        // move newline to last and indent to next
+                    //}
+                    stack.peek().add(new TextAston(text));
                 break;
                 case XMLEvent.COMMENT: break;                
                 case XMLEvent.END_ELEMENT: 
-                    stack.pop();
                 break;
                 case XMLEvent.END_DOCUMENT: break;
             }            
@@ -101,7 +100,7 @@ public class TalTemplateParser implements TemplateParser {
         }
         public Aston apply(Aston aston) {
             switch (dire) {
-                case content: return aston.clear().add(new TextAston(value));
+                case content: return aston.clear().add(new EvalAston(value));
                 default: return aston;
             }            
         }
