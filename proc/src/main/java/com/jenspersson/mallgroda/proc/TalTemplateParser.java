@@ -73,6 +73,7 @@ public class TalTemplateParser implements TemplateParser {
                 break;
                 case XMLEvent.COMMENT: break;                
                 case XMLEvent.END_ELEMENT: 
+                    stack.pop();
                 break;
                 case XMLEvent.END_DOCUMENT: break;
             }            

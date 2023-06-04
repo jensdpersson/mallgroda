@@ -32,6 +32,7 @@ public class WidgetModelProcessor extends AbstractProcessor {
                     Aston ast = parser.parse(fist);
                     WidgetTemplate widgetTemplate = new WidgetTemplate();
                     ast.apply(widgetTemplate);
+                    widgetTemplate.reline();
                     WidgetJavaFile out = new WidgetJavaFile(model.generatee());
                     out.write(widgetTemplate, elem, processingEnv);
                 } catch (Exception ex) {
