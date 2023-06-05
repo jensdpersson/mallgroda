@@ -65,12 +65,21 @@ public class RoundtripTest {
 
     @Test
     public void static_text() {
-        doTest(new Testcase(new StaticTextWidgetModel(), "static_text"));
+        doTest(new Testcase(new TestStaticTextWidgetModel(), "static_text"));
     }
 
     @Test
-    public void eval_content() {
-
+    public void content() {
+        doTest(new Testcase(new TestContentWidgetModel(), "content"));
+    }
+    
+    @Test
+    public void repeat() {
+        doTest(new Testcase(new TestRepeatWidgetModel(
+            new TestRepeatWidgetModel.Dungeon().name("Deku Tree").item("slingshot").boss("Queen Gohma"),
+            new TestRepeatWidgetModel.Dungeon().name("Dodongo's Cavern").item("Bomb Bag").boss("King Dodongo"),
+            new TestRepeatWidgetModel.Dungeon().name("Lord Jabu-Jabu's Belly").item("Boomerang").boss("Dr. Eggman")
+        ), "repeat"));
     }
 
 }

@@ -1,0 +1,4 @@
+*.class
+/test/target
+/proc/target
+/runtime/target

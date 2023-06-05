@@ -9,6 +9,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import static javax.tools.Diagnostic.Kind;
 
 import com.jenspersson.mallgroda.runtime.Syntax;
 import com.jenspersson.mallgroda.runtime.WidgetModel;
@@ -21,7 +22,7 @@ public class WidgetModelProcessor extends AbstractProcessor {
         for (TypeElement anno : annos) {
             Set<? extends Element> annotatedElements 
                 = round.getElementsAnnotatedWith(anno);
-            log("Checking ", annotatedElements);
+            log(Kind.NOTE, "Checking ", annotatedElements);
             for (Element elem : annotatedElements) {
                 WidgetModel model = elem.getAnnotation(WidgetModel.class);
                 Syntax syntax = model.syntax();
@@ -37,17 +38,20 @@ public class WidgetModelProcessor extends AbstractProcessor {
                     out.write(widgetTemplate, elem, processingEnv);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    log(Kind.ERROR, ex);
                 }
             }
         }
         return true;
     }
 
-    private void log(Object... msg) {
+    private void log(Kind kind, Object... msg) {
+        StringBuilder buf = new StringBuilder();
         for(Object o: msg) {
-            System.out.print(String.valueOf(o));
+            buf.append(String.valueOf(o));
         }
-        System.out.println("");
+        buf.append("\n");
+        processingEnv.getMessager().printMessage(kind, buf.toString());
     }
     
 }
