@@ -9,6 +9,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 import static javax.tools.Diagnostic.Kind;
 
 import com.jenspersson.mallgroda.runtime.Syntax;
@@ -23,11 +24,20 @@ public class WidgetModelProcessor extends AbstractProcessor {
             Set<? extends Element> annotatedElements 
                 = round.getElementsAnnotatedWith(anno);
             log(Kind.NOTE, "Checking ", annotatedElements);
+            
+            TypeInfoRegistry typeInfoRegistry = new TypeInfoRegistry();
+            
             for (Element elem : annotatedElements) {
                 WidgetModel model = elem.getAnnotation(WidgetModel.class);
                 Syntax syntax = model.syntax();
                 TemplateParser parser = TemplateParserRegistry.lookup(syntax);
-                String template = model.template();                
+                String template = model.template();
+                
+                TypeMirror elemType = elem.asType();
+                TypeInfo type = typeInfoRegistry.get(elemType);
+                log(Kind.ERROR, type);
+                ModelStack modelStack = new ModelStack("model", type, null);
+                
                 try {
                     FileInputStream fist = new FileInputStream(template);
                     Aston ast = parser.parse(fist);
