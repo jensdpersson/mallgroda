@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -37,10 +38,10 @@ public class RoundtripTest {
             StringWriter w = new StringWriter();
             widget.render(test.model, w);
             String result = w.toString();
-            StringTokenizer toker = new StringTokenizer(result);
+            Iterator<String> actual = Arrays.asList(result.split("\n\r?")).iterator();
             List<String> facit = Files.readAllLines(Paths.get(test.facit));
             for(String line : facit) {
-                assertEquals(line, toker.nextToken());
+                assertEquals(line, actual.next());
             }
         } catch (ClassNotFoundException cfex) {
             fail("Could not find renderer class [" + generatee + "] perhaps it was not generated?" );
@@ -64,12 +65,21 @@ public class RoundtripTest {
 
     @Test
     public void static_text() {
-        doTest(new Testcase(new StaticTextWidgetModel(), "static_text"));
+        doTest(new Testcase(new TestStaticTextWidgetModel(), "static_text"));
     }
 
     @Test
-    public void eval_content() {
-
+    public void content() {
+        doTest(new Testcase(new TestContentWidgetModel(), "content"));
+    }
+    
+    @Test
+    public void repeat() {
+        doTest(new Testcase(new TestRepeatWidgetModel(
+            new TestRepeatWidgetModel.Dungeon().name("Deku Tree").item("slingshot").boss("Queen Gohma"),
+            new TestRepeatWidgetModel.Dungeon().name("Dodongo's Cavern").item("Bomb Bag").boss("King Dodongo"),
+            new TestRepeatWidgetModel.Dungeon().name("Lord Jabu-Jabu's Belly").item("Boomerang").boss("Dr. Eggman")
+        ), "repeat"));
     }
 
 }

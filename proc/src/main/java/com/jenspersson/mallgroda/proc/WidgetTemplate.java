@@ -35,13 +35,12 @@ public class WidgetTemplate {
     String preindent = "";
     while (it.hasNext()) {
         Fragment frag = it.next();
-        if (frag.removeInitialNewline()) {
+        boolean removedInitialNewline = frag.removeInitialNewline();
+        frag.prepend(preindent);
+        if (removedInitialNewline) {
             last.appendNewline();
-            //last.prepend(preindent);
-            preindent = frag.removeTrailingIndent();
-        } else {
-            frag.prepend(preindent);
         }
+        preindent = frag.removeTrailingIndent();
         last = frag;
     }
   }

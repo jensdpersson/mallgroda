@@ -73,6 +73,7 @@ public class TalTemplateParser implements TemplateParser {
                 break;
                 case XMLEvent.COMMENT: break;                
                 case XMLEvent.END_ELEMENT: 
+                    stack.pop();
                 break;
                 case XMLEvent.END_DOCUMENT: break;
             }            
@@ -101,6 +102,7 @@ public class TalTemplateParser implements TemplateParser {
         public Aston apply(Aston aston) {
             switch (dire) {
                 case content: return aston.clear().add(new EvalAston(value));
+                case repeat: return aston.clear().add(new RepeatAston(value));
                 default: return aston;
             }            
         }
