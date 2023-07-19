@@ -25,7 +25,7 @@ public class WidgetModelProcessor extends AbstractProcessor {
                 = round.getElementsAnnotatedWith(anno);
             log(Kind.NOTE, "Checking ", annotatedElements);
             
-            TypeInfoRegistry typeInfoRegistry = new TypeInfoRegistry();
+            TypeInfoRegistry typeInfoRegistry = new TypeInfoRegistry(processingEnv.getElementUtils());
             
             for (Element elem : annotatedElements) {
                 WidgetModel model = elem.getAnnotation(WidgetModel.class);
@@ -33,16 +33,15 @@ public class WidgetModelProcessor extends AbstractProcessor {
                 TemplateParser parser = TemplateParserRegistry.lookup(syntax);
                 String template = model.template();
                 
-                TypeMirror elemType = elem.asType();
-                TypeInfo type = typeInfoRegistry.get(elemType);
-                log(Kind.ERROR, type);
+                TypeInfo type = typeInfoRegistry.get(elem);
+                //log(Kind.ERROR, type);
                 ModelStack modelStack = new ModelStack("model", type, null);
                 
                 try {
                     FileInputStream fist = new FileInputStream(template);
-                    Aston ast = parser.parse(fist);
+                    WidgetTemplatePopulator widgetTemplatePopulator = parser.parse(fist);
                     WidgetTemplate widgetTemplate = new WidgetTemplate();
-                    ast.apply(widgetTemplate);
+                    widgetTemplatePopulator.populate(widgetTemplate, modelStack);
                     widgetTemplate.reline();
                     WidgetJavaFile out = new WidgetJavaFile(model.generatee());
                     out.write(widgetTemplate, elem, processingEnv);

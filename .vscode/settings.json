@@ -1,3 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "editor.unicodeHighlight.invisibleCharacters": true,
+    "editor.renderWhitespace": "all"
 }

@@ -1,8 +1,6 @@
 package com.jenspersson.mallgroda.proc;
 
-public interface Aston {
-
-   public void apply(WidgetTemplate template);
+public interface Aston extends WidgetTemplatePopulator {
 
    /*
    * @return this
@@ -10,5 +8,7 @@ public interface Aston {
    public Aston add(Aston child) throws AstonIsLeafException;
 
    public Aston clear();
+   
+   public Directive directive();
 
 }

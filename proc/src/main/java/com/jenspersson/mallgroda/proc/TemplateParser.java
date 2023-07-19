@@ -4,5 +4,5 @@ import java.io.InputStream;
 
 public interface TemplateParser {
 
-    public Aston parse(InputStream input) throws Exception;
+    public WidgetTemplatePopulator parse(InputStream input) throws Exception;
 }

@@ -1,7 +1,5 @@
 package com.jenspersson.mallgroda.proc;
 
-import java.util.List;
-
 public class ModelStack {
     
     private String key;
@@ -13,4 +11,16 @@ public class ModelStack {
         this.typeInfo = typeInfo;
         this.parent = parent;
     }
+
+    public TypeInfo findType(String varname) {
+        if (varname.equals(this.key)) {
+            return this.typeInfo;
+        }
+        if (parent == null) {
+            throw new RuntimeException("Cannot find var [" + varname + "] in context");
+        };
+        return parent.findType(varname);
+    }
+
+    
 }

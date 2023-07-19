@@ -4,6 +4,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.function.Function;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
@@ -17,10 +21,10 @@ public class TalTemplateParser implements TemplateParser {
     private static final XMLInputFactory staxFactory = XMLInputFactory.newFactory();
 
     @Override
-    public Aston parse(InputStream input) throws Exception {
+    public WidgetTemplatePopulator parse(InputStream input) throws Exception {
         XMLEventReader xreader = staxFactory.createXMLEventReader(input);
         AstonStack stack = new AstonStack();
-        Aston root = new ParentAston();
+        RootAston root = new RootAston();
         stack.push(root);
         while(xreader.hasNext()) {
             XMLEvent evt = xreader.nextEvent();            
@@ -33,42 +37,38 @@ public class TalTemplateParser implements TemplateParser {
                     QName qname = start.getName();
                     String prefix = qname.getPrefix();
                     String local = qname.getLocalPart();
-                    HtmlAston xfrag = new HtmlAston(prefix, local);
-                    Aston frag = xfrag;
-                    Aston top = stack.peek();
-                    List<Directive> dires = new ArrayList<>();
+                    
+                    List<Aston> astons = new ArrayList<>();
+                    
+                    HtmlAston html = new HtmlAston(prefix, local);
+                    astons.add(html);
+                    
                     for(Iterator<Attribute> it = start.getAttributes(); it.hasNext();) {
                         Attribute attr = it.next();
                         String name = attr.getName().getLocalPart();
-                        DirectiveEnum dire = null;
-                        for (DirectiveEnum denum : DirectiveEnum.values()) {
-                            if (denum.name().equals(name)) {
-                                dire = denum;
-                                break;
-                            }
-                        }
-                        if (dire != null) {
-                            dires.add(dire.create(attr.getValue()));
+                        String value = attr.getValue();
+                        Aston mapped = map(name, value);
+                        if (mapped != null) {
+                            astons.add(mapped);
                         } else {
-                            xfrag.attr(name, attr.getValue());
+                            html.attr(name, attr.getValue());
                         }
-                    }
-                    dires.sort(null);
-                    for (Directive dire : dires) {
-                        frag = dire.apply(frag);
                     }
                     
-                    top.add(frag);
-                    stack.push(frag);
+                    astons.sort(Comparator.comparing(a -> a.directive()));
+                    
+                    Aston aston = stack.peek();
+                    for (Aston next : astons) {
+                        aston.add(next);
+                        aston = next;
+                    }
+                    stack.push(aston);
                 break;
                 case XMLEvent.ATTRIBUTE: 
                 break;
                 case XMLEvent.CDATA:  
                 case XMLEvent.CHARACTERS:
                     String text = evt.asCharacters().toString();
-                    //if (text.startsWith("\n")) {
-                        // move newline to last and indent to next
-                    //}
                     stack.peek().add(new TextAston(text));
                 break;
                 case XMLEvent.COMMENT: break;                
@@ -81,30 +81,20 @@ public class TalTemplateParser implements TemplateParser {
         return root;
     }
 
-    enum DirectiveEnum {
-        repeat, condition, text, replace, content, include;
-        Directive create(String value) {            
-            return new Directive(this, value);
-        }
-    }
-
-    static class Directive implements Comparable<Directive> {
-        private DirectiveEnum dire;
-        private String value;
-        Directive(DirectiveEnum dire, String value) {
-            this.dire = dire;
-            this.value = value;
-        }
-        @Override
-        public int compareTo(Directive that) {
-            return this.dire.compareTo(that.dire);
-        }
-        public Aston apply(Aston aston) {
-            switch (dire) {
-                case content: return aston.clear().add(new EvalAston(value));
-                case repeat: return aston.clear().add(new RepeatAston(value));
-                default: return aston;
-            }            
+   
+   private static Map<String, Function<String,Aston>> map = new HashMap<>();
+   static {
+       map.put(Directive.content.name(), EvalAston::new);
+       map.put(Directive.repeat.name(), RepeatAston::new);
+   }
+   
+    
+    Aston map(String name, String value) {
+        Function<String,Aston> astor = map.get(name);
+        if (astor != null) {
+            return astor.apply(value);
+        } else {
+            return null;
         }
     }
 

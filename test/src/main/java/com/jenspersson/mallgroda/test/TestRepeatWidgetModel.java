@@ -30,15 +30,26 @@ public class TestRepeatWidgetModel {
             this.name = name;
             return this;
         }
+        public String name() {
+            return this.name;
+        }
         
         public Dungeon item(String item) {
             this.item = item;
             return this;
         }
+
+        public String item() {
+            return this.item;
+        }
         
         public Dungeon boss(String boss) {
             this.boss = boss;
             return this;
+        }
+
+        public String boss() {
+            return this.boss;
         }
     }
     

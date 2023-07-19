@@ -13,6 +13,8 @@ public class Fragment {
     public void add(Fragment frag) {
         children.add(frag);
     }
+    
+    public void prev(Fragment prev) {}
 
     protected List<Fragment> children() {
         return children;

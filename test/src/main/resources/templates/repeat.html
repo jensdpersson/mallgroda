@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr tal:repeat="dung dungeons()">
+                <tr tal:repeat="dung model.dungeons()">
                     <td tal:content="dung.name()">Placeholder dungeon name</td>
                     <td tal:content="dung.item()">Placeholder dungeon item</td>
                     <td tal:content="dung.boss()">Placeholder dungeon boss</td>

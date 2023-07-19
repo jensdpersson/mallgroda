@@ -9,7 +9,7 @@ public class TextAston implements Aston {
     }
 
     @Override
-    public void apply(WidgetTemplate template) {
+    public void populate(WidgetTemplate template, ModelStack modelStack) {
      template.addFragment(new LineFragment(text));   
     }
 
@@ -21,6 +21,12 @@ public class TextAston implements Aston {
     @Override
     public Aston clear() {        
         return this;
+    }
+    
+    
+    @Override
+    public Directive directive() {
+        return Directive.text;
     }
 
 }

@@ -12,6 +12,6 @@ public class EvalFragment extends Fragment {
 
     @Override
     public void write(Indent indent, Out out) {
-        out.w(indent, "w.write(model.", code, ");\n");
+        out.w(indent, "w.write(", code, ");\n");
     }
 }

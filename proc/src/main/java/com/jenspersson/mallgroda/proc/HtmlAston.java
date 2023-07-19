@@ -10,7 +10,7 @@ public class HtmlAston extends ParentAston {
     }
 
     @Override
-    public void apply(WidgetTemplate template) {
+    public void populate(WidgetTemplate template, ModelStack modelStack) {
         if (children.isEmpty()) {
             if (Html5.isVoid(name)) {
                 template.addFragment(new LineFragment("<" + name + attrs + "/>"));
@@ -19,7 +19,7 @@ public class HtmlAston extends ParentAston {
             }
         } else {
             template.addFragment(new LineFragment("<" + name + attrs + ">"));
-            children.forEach(c -> c.apply(template));
+            children.forEach(c -> c.populate(template, modelStack));
             template.addFragment(new LineFragment("</" + name + ">"));
         }  
     }
@@ -31,6 +31,12 @@ public class HtmlAston extends ParentAston {
             .append("=\\\"")
             .append(value.replace("\"", "&quot;"))
             .append("\\\"");
+    }
+    
+    
+    @Override
+    public Directive directive() {
+        return Directive.html;
     }
 
 }

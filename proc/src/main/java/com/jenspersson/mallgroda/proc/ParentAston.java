@@ -3,13 +3,13 @@ package com.jenspersson.mallgroda.proc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParentAston implements Aston {
+public abstract class ParentAston implements Aston {
     
     protected List<Aston> children = new ArrayList<>();
 
     @Override
-    public void apply(WidgetTemplate template) {
-        children.forEach(c -> c.apply(template));
+    public void populate(WidgetTemplate template, ModelStack modelStack) {
+        children.forEach(c -> c.populate(template, modelStack));
     }
 
     public Aston add(Aston child) {

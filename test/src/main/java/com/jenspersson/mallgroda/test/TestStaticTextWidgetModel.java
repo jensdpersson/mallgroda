@@ -7,5 +7,7 @@ import com.jenspersson.mallgroda.runtime.WidgetModel;
     template = "test/src/main/resources/templates/static_text.html"
 )
 public class TestStaticTextWidgetModel {
-    
+    public String bollhav() {
+        return "apa";
+    }
 }

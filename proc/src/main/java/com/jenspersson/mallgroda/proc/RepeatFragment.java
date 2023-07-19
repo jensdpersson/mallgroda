@@ -19,4 +19,16 @@ public class RepeatFragment extends Fragment {
     public void write(Indent indent, Out out) {
         out.w(indent, "for (", type, " ", varname, " : ", expr, ") {\n");
     }
+    
+    private String prepend;
+    
+    @Override
+    public void prepend(String prepend) {
+        this.prepend = prepend;
+    }
+    
+    @Override
+    public String removeTrailingIndent() {
+        return this.prepend;
+    }
 }

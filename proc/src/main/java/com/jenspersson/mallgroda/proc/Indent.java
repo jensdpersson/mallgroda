@@ -15,6 +15,7 @@ public class Indent {
         this.lineStart += INDENT;
         return this;
     }
+    
     Indent less() {
         this.lineStart = this.lineStart.substring(0, this.lineStart.length() - LENG);
         return this;

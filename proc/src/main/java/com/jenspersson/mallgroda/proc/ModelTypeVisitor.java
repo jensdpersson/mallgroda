@@ -36,7 +36,6 @@ public class ModelTypeVisitor implements TypeVisitor<Void, TypeInfo> {
 
     @Override
     public Void visitExecutable(ExecutableType t, TypeInfo p) {
-        p.addMethod(t.toString());
         return null;
     }
 

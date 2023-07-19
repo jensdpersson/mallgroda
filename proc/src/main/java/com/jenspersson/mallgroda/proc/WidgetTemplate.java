@@ -35,6 +35,7 @@ public class WidgetTemplate {
     String preindent = "";
     while (it.hasNext()) {
         Fragment frag = it.next();
+        frag.prev(last);
         boolean removedInitialNewline = frag.removeInitialNewline();
         frag.prepend(preindent);
         if (removedInitialNewline) {
